@@ -30,7 +30,17 @@ class Program
         {
             letter = "F";
         }
-
+//      
+        int lastDigit = percent % 10;
+        if (lastDigit >= 7 && letter != "A" && letter != "F")
+        { 
+            letter += "+";
+        }
+        else if (lastDigit < 3 && letter != "F")
+        {
+            letter += "-"; 
+        }
+//
         Console.WriteLine($"Your grade is: {letter}");
 
         if (percent >= 70)
