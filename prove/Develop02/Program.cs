@@ -6,6 +6,8 @@ class Entry
     public string Prompt { get; set; }
     public string Response { get; set; }
     public string Date { get; set; }
+    public string Location { get; set; } // Creativity: property for location
+    public string Affirmation { get; set; } // Creativity: property for affirmation
 }
 
 // Journal class to manage a collection of journal entries
@@ -28,8 +30,10 @@ class Journal
         foreach (var entry in entries)
         {
             Console.WriteLine($"Date: {entry.Date}");
+            Console.WriteLine($"Location: {entry.Location}");
             Console.WriteLine($"Prompt: {entry.Prompt}");
             Console.WriteLine($"Response: {entry.Response}");
+            Console.WriteLine($"Affirmation: {entry.Affirmation}");
             Console.WriteLine();
         }
     }
@@ -84,6 +88,18 @@ class Journal
 }
 class Program
 {
+    private static string GetLocation()
+    {
+        Console.WriteLine("Location (e.g., city or place):");
+        return Console.ReadLine();
+    }
+
+    private static string GetAffirmation()
+    {
+        Console.WriteLine("Affirmation (a positive statement or thought):");
+        return Console.ReadLine();
+    }
+
     static void Main(string[] args)
     {
         Journal journal = new Journal();
@@ -118,12 +134,15 @@ class Program
                     Console.WriteLine("Response:");
                     string response = Console.ReadLine();
                     string date = DateTime.Now.ToShortDateString();
+
                     // Create a new journal entry
                     Entry entry = new Entry
                     {
                         Prompt = randomPrompt,
                         Response = response,
-                        Date = date
+                        Date = date,
+                        Location = GetLocation(), // Call a method to get the location
+                        Affirmation = GetAffirmation() // Call a method to get the affirmation
                     };
 
                     journal.AddEntry(entry);
