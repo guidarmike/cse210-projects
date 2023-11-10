@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 public class Scripture
 {
     private Reference _reference;
@@ -10,6 +7,16 @@ public class Scripture
     {
         _reference = reference;
         _words = words;
+    }
+
+    public Reference GetReference()
+    {
+        return _reference;
+    }
+
+    public List<Word> GetWords()
+    {
+        return _words;
     }
 
     public void Show()
