@@ -94,10 +94,8 @@ class Program
         {
             using (StreamWriter writer = new StreamWriter(fileName))
             {
-                // Save reference information
                 writer.WriteLine($"{scripture.GetReference().GetRenderedText()}");
 
-                // Save each word in a new line
                 foreach (Word word in scripture.GetWords())
                 {
                     writer.WriteLine($"{word.GetRenderedText()}|{word.IsHidden()}");
@@ -116,34 +114,18 @@ class Program
         {
             using (StreamReader reader = new StreamReader(fileName))
             {
-                // Read reference information
                 string referenceLine = reader.ReadLine();
                 string[] referenceParts = referenceLine.Split(' ');
 
-                string book = string.Join(" ", referenceParts.Skip(1)); // Join the parts after skipping the first
-                int chapter = int.Parse(referenceParts.Last().Split(':')[0]);
-                int verseStart = int.Parse(referenceParts.Last().Split(':')[1].Split('-')[0]);
-                int? verseEnd = referenceParts.Last().Contains('-') ? int.Parse(referenceParts.Last().Split(':')[1].Split('-')[1]) : (int?)null;
+                string book = string.Join(" ", referenceParts.Skip(1));
+                int chapter = int.Parse(referenceParts[2].Split(':')[0]);
+                int verseStart = int.Parse(referenceParts[2].Split(':')[1].Split('-')[0]);
+                int? verseEnd = referenceParts[2].Contains('-') ? int.Parse(referenceParts[2].Split(':')[1].Split('-')[1]) : (int?)null;
+
+                string scriptureText = reader.ReadLine();
+                List<Word> words = scriptureText.Split(' ').Select(word => new Word(word)).ToList();
 
                 Reference reference = new Reference(book, chapter, verseStart, verseEnd);
-
-                // Read each word from the file
-                List<Word> words = new List<Word>();
-                while (!reader.EndOfStream)
-                {
-                    string wordLine = reader.ReadLine();
-                    string[] wordParts = wordLine.Split('|');
-                    string wordText = wordParts[0];
-                    bool isHidden = bool.Parse(wordParts[1]);
-
-                    Word word = new Word(wordText);
-                    if (isHidden)
-                    {
-                        word.Hide();
-                    }
-
-                    words.Add(word);
-                }
 
                 return new Scripture(reference, words);
             }
