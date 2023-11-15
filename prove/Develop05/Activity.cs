@@ -3,7 +3,7 @@ class Activity
     private string _name;
     protected string _description;
     private int _points;
-    public bool Completed;
+    public bool Completed; 
 
     public Activity(string name, int points, string description)
     {

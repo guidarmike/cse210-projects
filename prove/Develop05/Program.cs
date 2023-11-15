@@ -301,10 +301,6 @@ class Program
                         user._goals.Add(goal);
                     }
                 }
-                else
-                {
-                    // Handle other types of goals if needed
-                }
             }
         }
     }
@@ -324,32 +320,32 @@ class Program
         {
             Activity selectedGoal = goals[goalIndex - 1];
 
-            // Check if the goal is a SimpleGoal and has not already been completed
             if (selectedGoal is SimpleGoal simpleGoal && !simpleGoal.Completed)
             {
-                // Check the goal as completed
                 simpleGoal.MarkComplete();
 
-                // Update the user's score based on the goal type
                 user._score += selectedGoal.GetPoints();
 
                 Console.WriteLine($"You have completed the Simple Goal: {selectedGoal.GetName()}.");
             }
-            // Check if the goal is a ChecklistGoal and has not reached the target count
+
             else if (selectedGoal is ChecklistGoal checklistGoal && checklistGoal._currentCount < checklistGoal.TargetCount)
             {
-                // Check the goal as completed
                 checklistGoal.MarkComplete();
 
-                // Update the user's score based on the goal type
                 user._score += checklistGoal.GetPoints();
 
                 Console.WriteLine($"You have completed the Checklist Goal: {selectedGoal.GetName()}.");
+
+                if (checklistGoal._currentCount == checklistGoal.TargetCount)
+                {
+                    user._score += checklistGoal.BonusPoints;
+                    Console.WriteLine($"Bonus Points awarded for completing the Checklist Goal: {checklistGoal.BonusPoints}.");
+                }
             }
-            // Check if the goal is an EternalGoal (EternalGoal never completes)
+
             else if (selectedGoal is EternalGoal)
             {
-                // Update the user's score based on the goal type
                 user._score += selectedGoal.GetPoints();
 
                 Console.WriteLine($"You are one step closer to your Eternal Goal: {selectedGoal.GetName()}.");
