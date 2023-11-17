@@ -9,6 +9,7 @@ class Program
 
         while (true)
         {
+            Console.WriteLine("\n");
             Console.WriteLine($"You have {user.GetScore()} points.");
             Console.WriteLine("\nMenu Options:");
             Console.WriteLine("1. Create a New Goal");
@@ -350,6 +351,11 @@ class Program
 
                 Console.WriteLine($"You are one step closer to your Eternal Goal: {selectedGoal.GetName()}.");
             }
+
+            // To exceed requirements we have new methods in the User class to get and update the user level starting from 0 reaching a max level of 5.
+            user.UpdateLevel();
+            Console.WriteLine($"You have {user.GetScore()} points and you are at Level {user.GetLevel()}.");
+
         }
         else
         {
@@ -369,5 +375,4 @@ class Program
             Console.WriteLine($"{i + 1}. {status} \"{goal.GetName()}\" (\"{goal.GetDescription()}\"){description}");
         }
     }
-
 }
