@@ -11,7 +11,7 @@ class Program
 
         Lecture lecture = new Lecture("Modern Reality of Depression", "A talk through how we got here emotionally", lectureDate, new TimeSpan(17, 0, 0), new Address("123 Main St", "Cityville", "CA", "12345"), "Jordan B. Peterson", 750);
 
-        Reception reception = new Reception("Christmas' Eve Grand Dinner", "An elegant dinner in remembrance of this joyous day", receptionDate, new TimeSpan(18, 30, 0), new Address("456 Oak St", "Townsville", "NY", "67890"), "town.hall@yahoo.com");
+        Reception reception = new Reception("Grand Christmas' Eve Dinner", "An elegant dinner in remembrance of this joyous day", receptionDate, new TimeSpan(18, 30, 0), new Address("456 Oak St", "Townsville", "NY", "67890"), "town.hall@yahoo.com");
 
         OutdoorGathering outdoorGathering = new OutdoorGathering("New Year's Eve", "Casual last night for this 2023", outdoorGatheringDate, new TimeSpan(21, 0, 0), new Address("789 Pine St", "Villageton", "TX", "54321"), "Sunny skies expected");
 
